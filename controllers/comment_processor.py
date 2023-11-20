@@ -2,6 +2,7 @@ from controllers.utils import extract_id
 from controllers.youtube_api import fetch_comments_from_youtube_api
 from controllers.azuretext_api import detect_language_for_column
 from controllers.translator import translate_df
+from controllers.recognize_hate_messages import recognize_hate_messages
 
 
 def extract_comments_and_languages(video_link):
@@ -17,4 +18,5 @@ def extract_comments_and_languages(video_link):
     df = fetch_comments_from_youtube_api(video_id)
     df = detect_language_for_column(df)
     df = translate_df(df)
+    df = recognize_hate_messages(df)
     return df

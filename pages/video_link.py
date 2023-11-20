@@ -9,5 +9,5 @@ if st.button("Send"):
     df = extract_comments_and_languages(video_link)
     # TODO buscar y mostrar el titulo del video
     # st.title(video_link)
-    columns_to_show = ["text", "Detected_Language", "Translated_Text"]
+    columns_to_show = ["Translated_Text", "Hate_Label"]
     st.dataframe(df[columns_to_show])
