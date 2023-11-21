@@ -14,7 +14,6 @@ def extract_comments_and_languages(video_link):
     :return: a pandas DataFrame containing two columns: "text" and "Detected_Language".
     """
     video_id = extract_id(video_link)
-    # df = detect_language(df)
     df = fetch_comments_from_youtube_api(video_id)
     df = detect_language_for_column(df)
     df = translate_df(df)
