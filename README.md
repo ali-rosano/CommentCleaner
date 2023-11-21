@@ -1,4 +1,4 @@
-![Image alt](https://github.com/AI-School-F5-P2/)
+![Image alt](https://github.com/AI-School-F5-P2/CommentCleaner/blob/main/Hate_speech_banner.png)
 
 
 # PROYECTO NLP. 
