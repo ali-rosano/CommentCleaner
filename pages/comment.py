@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+from vectorizer import vectorize_comment
 
 os.system("cls")
 st.title("Insert a comment")
