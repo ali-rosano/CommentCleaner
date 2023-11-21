@@ -5,22 +5,17 @@ from PIL import Image
 def app():
 
     #banner
-    st.image(Image.open('Images/socialmedia-banner.jpeg'), width=1380)
-    
+    st.image(Image.open('Images/socialmedia-banner.jpeg'),width=880)
+    st.title("CommentCleaner")
 
-    #text style
-    st.markdown('<h1 style="color: blue; font-size: 36px;">Comment Cleaner</h1>', unsafe_allow_html=True)
-
-    st.title("Comment cleaner")
-    st.write("""""
-    ###Transformando la Experiencia de YouTube: De la Toxicidad a la Positividad
-
-    **Abordaremos el creciente problema de mensajes de odio en YouTube con una solución NLP innovadora y práctica**
+    st.subheader('Transformando la Experiencia de YouTube: De la Toxicidad a la Positividad')
+    st.write("""
+        **Abordaremos el creciente problema de mensajes de odio en YouTube con una solución NLP innovadora y práctica**
              
     """)
 
     #place videos in paralel
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
 
     video_file1 = open('Images/pexels-mart-production-7279746 (2160p).mp4', 'rb')
     video_bytes1 = video_file1.read()
@@ -30,6 +25,7 @@ def app():
     video_file2 = open('Images/pexels-darina-belonogova-7971669 (1080p).mp4', 'rb')
     video_bytes2 = video_file2.read()
     col2.video(video_bytes2)
+
 
 
 
