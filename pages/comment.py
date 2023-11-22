@@ -1,24 +1,42 @@
 import streamlit as st
-import os
-from vectorizer import vectorize_comment
 
-os.system("cls")
-st.title("Insert a comment")
-comment = st.text_input("comment", label_visibility="hidden")
-if st.button("Send comment"):
-    print(comment)
-    # os.system("cls")
+import tensorflow as tf
+from tensorflow.keras.layers import TextVectorization
+from controllers.vectorizer import vectorize_comment
 
-    #
-    # with open("model.pkl", "rb") as model_file:
-    #     model = pickle.load(model_file)
+model = tf.keras.models.load_model("model/hate_speech2.h5")
 
-    # with open("preprocessor.pkl", "rb") as preprocessor_file:
-    #     preprocessor = pickle.load(preprocessor_file)
-    #
+max_tokens = 100000
+output_sequence_length = 1800
 
-    # X_comment_preprocessed = preprocessor.transform(comment)
-    # predictions = model.predict(X_comment_preprocessed)
-    X_comment_preprocessed = "este es el texto sin procesar"
-    predictions = "nunca tiene hate"
-    st.info(f"We have found that your comment contains: {predictions}")
+vectorizer = TextVectorization(
+    max_tokens=max_tokens,
+    output_sequence_length=output_sequence_length,
+    output_mode="int",
+)
+
+example_comment = "i hate you black bitch"
+comments = [example_comment]
+vectorizer.adapt(comments)
+
+
+def predict_toxicity(comment):
+    comment = [comment]
+    preprocessed_comment = vectorizer(comment)
+    predictions = model.predict(preprocessed_comment)
+    return predictions[0][0]
+
+
+st.title("Hate Speech Detector")
+
+comment_input = st.text_area("Enter your comment here:")
+if st.button("Predict"):
+    if comment_input:
+        toxicity_prediction = predict_toxicity(comment_input)
+        if toxicity_prediction >= 0.5:
+            st.error("The comment contains hate speech.")
+        else:
+            st.success("The comment does NOT contain hate speech.")
+    else:
+        st.warning("Please enter a comment to make a prediction.")
+
