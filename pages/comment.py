@@ -1,4 +1,5 @@
 import streamlit as st
+
 import tensorflow as tf
 from tensorflow.keras.layers import TextVectorization
 from controllers.vectorizer import vectorize_comment
@@ -38,3 +39,4 @@ if st.button("Predict"):
             st.success("The comment does NOT contain hate speech.")
     else:
         st.warning("Please enter a comment to make a prediction.")
+
